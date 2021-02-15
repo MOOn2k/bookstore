@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: db
+  username: <%= Rails.application.credentials[:db][:default][:user] %>
+  password: <%= Rails.application.credentials[:db][:default][:password] %>
+
+development:
+  <<: *default
+  database: bookstore_development
+
+test:
+  <<: *default
+  database: bookstore_test
+
+production:
+  <<: *default
+  database: bookstore_production
